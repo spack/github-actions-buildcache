@@ -9,7 +9,9 @@ spack:
   - libtool
   - m4
   - meson
+  - mpich
   - ninja
+  - openmpi
   - perl
   - python@3.11
   view: false

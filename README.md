@@ -62,7 +62,7 @@ If you want to cache your own binaries too, there are three steps to take:
    spack:
      ...
      mirrors:
-       spack-buildcache: oci://ghcr.io/github-actions-buildcache
+       spack-buildcache: oci://ghcr.io/spack/github-actions-buildcache
        local-buildcache: oci://ghcr.io/<username>/spack-buildcache
    ```
 

@@ -22,4 +22,4 @@ spack:
     all:
       require: '%gcc@12 target=x86_64_v2'
   mirrors:
-    spack-buildcache: oci://ghcr.io/github-actions-buildcache
+    spack-buildcache: oci://ghcr.io/spack/github-actions-buildcache

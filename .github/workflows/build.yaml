@@ -9,7 +9,6 @@ env:
 jobs:
   rebuild:
     runs-on: ubuntu-22.04
-    concurrency: update_buildcache
     permissions:
       packages: write
     steps:

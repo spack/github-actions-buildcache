@@ -9,6 +9,7 @@ env:
 jobs:
   rebuild:
     runs-on: ubuntu-22.04
+    concurrency: update_buildcache
     permissions:
       packages: write
     steps:
@@ -31,4 +32,3 @@ jobs:
           spack -e . mirror set --push --oci-username haampie --oci-password "${{ secrets.GITHUB_TOKEN }}" spack-buildcache
           spack -e . buildcache push -j $(($(nproc) + 1)) --base-image ubuntu:22.04 --unsigned --update-index spack-buildcache
         if: always()
-        concurrency: create_buildcache

@@ -67,7 +67,8 @@ If you want to cache your own binaries too, there are three steps to take:
        local-buildcache: oci://ghcr.io/<username>/spack-buildcache
    ```
 
-2. Configure the permissions for `GITHUB_TOKEN`:
+2. Configure the concurrency of the job, as well as permissions for
+   `GITHUB_TOKEN`:
 
    ```yaml
    jobs:
@@ -75,8 +76,11 @@ If you want to cache your own binaries too, there are three steps to take:
        runs-on: ubuntu-22.04
        permissions:
          packages: write
+       concurrency: update_buildcache
        steps: ...
    ```
+   NOTE: Although builds can happen concurrently across different Github
+   Actions, it's best to update the index sequentially.
 
 3. Add an extra job step that pushes installed Spack packages to the local
    buildcache:
@@ -92,11 +96,8 @@ If you want to cache your own binaries too, there are three steps to take:
              spack -e . mirror set --push --oci-username <username> --oci-password "${{ secrets.GITHUB_TOKEN }}" local-buildcache
              spack -e . buildcache push --base-image ubuntu:22.04 --unsigned --update-index local-buildcache
            if: always()
-           concurrency: create_buildcache
    ```
    NOTE: Make sure to add `if: always()`, so that binaries for successfully
    installed packages are available also when a dependent fails to build.
 
-   NOTE: Updating the buildcache index is not race free, so use `concurrency`
-   to ensure that no two Github Actions push to the buildcache concurrently.
 

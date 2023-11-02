@@ -24,7 +24,9 @@ jobs:
       run: spack -e . concretize
 
     - name: Install
-      run: spack -e . install -j $(($(nproc) + 1)) --no-check-signature --fail-fast
+      run: |
+        spack -e . env depfile -o Makefile
+        make -Orecurse -j $(($(nproc) + 1)) SPACK_INSTALL_FLAGS=--no-check-signature
 
     - name: Push packages and update index
       run: |

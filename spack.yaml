@@ -1,19 +1,20 @@
 spack:
   specs:
-  - autoconf
-  - automake
-  - bison
-  - cmake
-  - flex
-  - git
-  - libtool
-  - m4
-  - meson
-  - mpich
-  - ninja
-  - openmpi
-  - perl
-  - python@3.11
+  - gmake
+  # - autoconf
+  # - automake
+  # - bison
+  # - cmake
+  # - flex
+  # - git
+  # - libtool
+  # - m4
+  # - meson
+  # - mpich
+  # - ninja
+  # - openmpi
+  # - perl
+  # - python@3.11
   view: false
   concretizer:
     unify: false

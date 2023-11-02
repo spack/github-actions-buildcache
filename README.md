@@ -79,4 +79,5 @@ jobs:
         run: |
           spack -e . mirror set --push --oci-username <username> --oci-password "${{ secrets.GITHUB_TOKEN }}" local-buildcache
           spack -e . buildcache push -j $(nproc) --base-image ubuntu:22.04 --unsigned --update-index local-buildcache
+        if: always()
 ```

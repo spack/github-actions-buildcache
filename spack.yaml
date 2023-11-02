@@ -12,6 +12,7 @@ spack:
   - meson
   - mpich
   - ninja
+  - openblas threads=openmp
   - openmpi
   - perl
   - python@3.11

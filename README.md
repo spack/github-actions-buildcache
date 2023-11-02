@@ -2,7 +2,7 @@
 
 This repo provides a buildcache to speed up Spack in your Github Actions.
 
-Currently it provides binaries for `%gcc@12 os=ubuntu22.04 target=x86_64_v2`
+Currently it provides binaries for `%gcc@12 os=ubuntu22.04 target=x86_64_v2` from Spack `develop`.
 
 To use it, add an environment `spack.yaml` to the root of your own repository
 

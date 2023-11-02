@@ -61,9 +61,7 @@ If you want to cache your own binaries too, there are three steps to take:
 
    ```yaml
    spack:
-   
      ...
-   
      mirrors:
        spack-buildcache: oci://ghcr.io/haampie/spack-buildcache
        local-buildcache: oci://ghcr.io/<username>/spack-buildcache

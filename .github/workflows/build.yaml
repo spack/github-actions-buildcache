@@ -7,7 +7,7 @@ env:
   SPACK_BACKTRACE: please
 
 jobs:
-  example:
+  rebuild:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout

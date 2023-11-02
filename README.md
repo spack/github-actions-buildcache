@@ -33,7 +33,7 @@ env:
 
 jobs:
   example:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -55,29 +55,45 @@ jobs:
 
 ## Caching your own binaries
 
-If you want to cache your own binaries too, add an additional mirror to your
-environment config:
+If you want to cache your own binaries too, there are three steps to take:
 
-```yaml
-spack:
+1. Add an additional mirror to your environment config:
 
-  ...
+   ```yaml
+   spack:
+   
+     ...
+   
+     mirrors:
+       spack-buildcache: oci://ghcr.io/haampie/spack-buildcache
+       local-buildcache: oci://ghcr.io/<username>/spack-buildcache
+   ```
 
-  mirrors:
-    spack-buildcache: oci://ghcr.io/haampie/spack-buildcache
-    local-buildcache: oci://ghcr.io/<username>/spack-buildcache
+2. Configure the permissions for `GITHUB_TOKEN`:
+
+   ```yaml
+   jobs:
+     example:
+       runs-on: ubuntu-22.04
+       permissions:
+         packages: write
+       steps: ...
 ```
 
-and push the environment's binaries to the local buildcache:
+3. Add an extra job step that pushes installed Spack packages to the local
+   buildcache. Make sure to add `if: always()`, so that binaries for
+   successfully installed packages are available also when a dependent fails to
+   build:
 
-```yaml
-jobs:
-  exampe:
-    steps:
-      ...
-      - name: Push packages and update index
-        run: |
-          spack -e . mirror set --push --oci-username <username> --oci-password "${{ secrets.GITHUB_TOKEN }}" local-buildcache
-          spack -e . buildcache push --base-image ubuntu:22.04 --unsigned --update-index local-buildcache
-        if: always()
-```
+   ```yaml
+   jobs:
+     example:
+       ...
+       steps:
+         ...
+         - name: Push packages and update index
+           run: |
+             spack -e . mirror set --push --oci-username <username> --oci-password "${{ secrets.GITHUB_TOKEN }}" local-buildcache
+             spack -e . buildcache push --base-image ubuntu:22.04 --unsigned --update-index local-buildcache
+           if: always()
+   ```

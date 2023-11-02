@@ -12,22 +12,22 @@ jobs:
     permissions:
       packages: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
-      - name: Install Spack
-        run: |
-          git clone --depth=1 https://github.com/spack/spack.git
-          echo "$PWD/spack/bin/" >> "$GITHUB_PATH"
+    - name: Install Spack
+      run: |
+        git clone --depth=1 https://github.com/spack/spack.git
+        echo "$PWD/spack/bin/" >> "$GITHUB_PATH"
 
-      - name: Concretize
-        run: spack -e . concretize
+    - name: Concretize
+      run: spack -e . concretize
 
-      - name: Install
-        run: spack -e . install -j $(($(nproc) + 1)) --no-check-signature --fail-fast
+    - name: Install
+      run: spack -e . install -j $(($(nproc) + 1)) --no-check-signature --fail-fast
 
-      - name: Push packages and update index
-        run: |
-          spack -e . mirror set --push --oci-username haampie --oci-password "${{ secrets.GITHUB_TOKEN }}" spack-buildcache
-          spack -e . buildcache push -j $(($(nproc) + 1)) --base-image ubuntu:22.04 --unsigned --update-index spack-buildcache
-        if: always()
+    - name: Push packages and update index
+      run: |
+        spack -e . mirror set --push --oci-username haampie --oci-password "${{ secrets.GITHUB_TOKEN }}" spack-buildcache
+        spack -e . buildcache push -j $(($(nproc) + 1)) --base-image ubuntu:22.04 --unsigned --update-index spack-buildcache
+      if: always()

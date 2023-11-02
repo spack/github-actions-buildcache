@@ -78,7 +78,7 @@ If you want to cache your own binaries too, there are three steps to take:
        permissions:
          packages: write
        steps: ...
-```
+   ```
 
 3. Add an extra job step that pushes installed Spack packages to the local
    buildcache. Make sure to add `if: always()`, so that binaries for

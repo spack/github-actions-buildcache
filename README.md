@@ -17,7 +17,7 @@ spack:
       require: '%gcc@12 target=x86_64_v2'
 
   mirrors:
-    spack-buildcache: oci://ghcr.io/haampie/spack-buildcache
+    spack-buildcache: oci://ghcr.io/spack/github-actions-buildcache
 ```
 
 and Spack install it in a Github Action:
@@ -62,7 +62,7 @@ If you want to cache your own binaries too, there are three steps to take:
    spack:
      ...
      mirrors:
-       spack-buildcache: oci://ghcr.io/haampie/spack-buildcache
+       spack-buildcache: oci://ghcr.io/github-actions-buildcache
        local-buildcache: oci://ghcr.io/<username>/spack-buildcache
    ```
 
@@ -85,7 +85,7 @@ If you want to cache your own binaries too, there are three steps to take:
        steps:
        - name: Push packages and update index
          run: |
-           spack -e . mirror set --push --oci-username <username> --oci-password "${{ secrets.GITHUB_TOKEN }}" local-buildcache
+           spack -e . mirror set --push --oci-username ${{ github.actor }} --oci-password "${{ secrets.GITHUB_TOKEN }}" local-buildcache
            spack -e . buildcache push --base-image ubuntu:22.04 --unsigned --update-index local-buildcache
          if: always()
    ```

@@ -1,4 +1,5 @@
 spack:
+  view: false
   specs:
   - autoconf
   - automake
@@ -14,11 +15,13 @@ spack:
   - openmpi
   - perl
   - python@3.11
-  view: false
   concretizer:
     unify: false
+  config:
+    install_tree:
+      padded_length: 128
+  mirrors:
+    spack-buildcache: oci://ghcr.io/spack/github-actions-buildcache
   packages:
     all:
       require: '%gcc@12 target=x86_64_v2'
-  mirrors:
-    spack-buildcache: oci://ghcr.io/spack/github-actions-buildcache

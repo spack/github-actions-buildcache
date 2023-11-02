@@ -1,0 +1,22 @@
+spack:
+  specs:
+  - autoconf
+  - automake
+  - bison
+  - cmake
+  - flex
+  - git
+  - libtool
+  - m4
+  - meson
+  - ninja
+  - perl
+  - python@3.11
+  view: false
+  concretizer:
+    unify: false
+  packages:
+    all:
+      require: '%gcc@12 target=x86_64_v2'
+  mirrors:
+    spack-buildcache: oci://ghcr.io/haampie/spack-buildcache

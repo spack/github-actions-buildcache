@@ -9,6 +9,8 @@ env:
 jobs:
   rebuild:
     runs-on: ubuntu-22.04
+    permissions:
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3

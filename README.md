@@ -12,6 +12,10 @@ spack:
   specs:
   - python@3.11
 
+  config:
+    install_tree:
+      root: /opt/spack
+
   packages:
     all:
       require: '%gcc@12 target=x86_64_v2'

@@ -1,6 +1,6 @@
-# Spack buildcache for Github Actions
+# Spack buildcache for GitHub Actions
 
-This repo provides a buildcache to speed up Spack in your Github Actions.
+This repo provides a buildcache to speed up Spack in your GitHub Actions.
 
 Currently it provides binaries for `%gcc@12 os=ubuntu22.04 target=x86_64_v2` from Spack `develop`.
 
@@ -20,7 +20,7 @@ spack:
     spack-buildcache: oci://ghcr.io/spack/github-actions-buildcache
 ```
 
-and Spack install it in a Github Action:
+and Spack install it in a GitHub Action:
 
 ```yaml
 name: Build
@@ -92,9 +92,9 @@ If you want to cache your own binaries too, there are three steps to take:
    NOTE: Make sure to add `if: always()`, so that binaries for successfully
    installed packages are available also when a dependent fails to build.
 
-## Working with *private* repos and buildcaches
+### Caching your own binaries in *private* repos and buildcaches
 
-When your repo or Github package where the buildcache is stored is private,
+When your local buildcache is stored in a private GitHub package,
 you need to specify the OCI credentials already *before* `spack concretize`.
 This is because Spack needs to fetch the buildcache index. Also, remember to
 remove the `--push` flag from `spack mirror set`, since fetching needs

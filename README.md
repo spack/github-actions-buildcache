@@ -118,7 +118,8 @@ jobs:
 ```
 
 From a security perspective, notice that the `GITHUB_TOKEN` is exposed to every
-subsequent job step.
+subsequent job step. (This is no different from `docker login`, which also likes
+to store credentials in the home directory.)
 
 ## License
 

@@ -94,7 +94,7 @@ If you want to cache your own binaries too, there are three steps to take:
 
 ## Working with *private* repos and buildcaches
 
-When your repo or Github Packages where the buildcache is stored are private,
+When your repo or Github package where the buildcache is stored is private,
 you need to specify the OCI credentials already *before* `spack concretize`.
 This is because Spack needs to fetch the buildcache index. Also, remember to
 remove the `--push` flag from `spack mirror set`, since fetching needs

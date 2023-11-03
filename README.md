@@ -92,6 +92,33 @@ If you want to cache your own binaries too, there are three steps to take:
    NOTE: Make sure to add `if: always()`, so that binaries for successfully
    installed packages are available also when a dependent fails to build.
 
+## Working with *private* repos and buildcaches
+
+When your repo or Github Packages where the buildcache is stored are private,
+you need to specify the OCI credentials already *before* `spack concretize`.
+This is because Spack needs to fetch the buildcache index. Also, remember to
+remove the `--push` flag from `spack mirror set`, since fetching needs
+credentials too:
+
+```yaml
+jobs:
+  example-private:
+    steps:
+    - name: Login
+      run: spack -e . mirror set --oci-username ${{ github.actor }} --oci-password "${{ secrets.GITHUB_TOKEN }}" local-buildcache
+
+    - name: Concretize
+      run: spack -e . concretize
+
+    - name: Install
+      run: spack -e . install --no-check-signature
+
+    - name: Push packages and update index
+      run: spack -e . buildcache push --base-image ubuntu:22.04 --unsigned --update-index local-buildcache
+```
+
+From a security perspective, notice that the `GITHUB_TOKEN` is exposed to every
+subsequent job step.
 
 ## License
 

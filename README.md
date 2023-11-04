@@ -64,11 +64,14 @@ jobs:
 
 If you want to cache your own binaries too, there are three steps to take:
 
-1. Add an additional mirror to your environment config:
+1. Use padding in the install root, and add an additional mirror to `spack.yaml`:
 
    ```yaml
    spack:
-     ...
+     config:
+       install_tree:
+         root: /opt/spack
+         padded_length: 128
      mirrors:
        spack-buildcache: oci://ghcr.io/spack/github-actions-buildcache
        local-buildcache: oci://ghcr.io/<username>/spack-buildcache

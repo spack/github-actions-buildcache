@@ -6,9 +6,12 @@ spack:
       - automake
       - bison
       - cmake
+      - fftw +mpi +openmp ^mpich
+      - fftw +mpi +openmp ^openmpi
       - flex
-      - hdf5 +cxx +fortran +hl
       - git
+      - hdf5 +cxx +fortran +hl +mpi ^mpich
+      - hdf5 +cxx +fortran +hl +mpi ^openmpi
       - libtool
       - m4
       - meson

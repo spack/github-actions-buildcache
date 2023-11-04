@@ -22,7 +22,7 @@ jobs:
         path: spack
 
     - name: Setup Spack
-      run: echo "$PWD/spack/bin/" >> "$GITHUB_PATH"
+      run: echo "$PWD/spack/bin" >> "$GITHUB_PATH"
 
     - name: Concretize
       run: spack -e . concretize

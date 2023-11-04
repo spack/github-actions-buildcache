@@ -41,10 +41,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Install Spack
-      run: |
-        git clone --depth=1 https://github.com/spack/spack.git
-        echo "$PWD/spack/bin/" >> "$GITHUB_PATH"
+    - name: Checkout Spack
+      uses: actions/checkout@v3
+      with:
+        repository: spack/spack
+        path: spack
+
+    - name: Setup Spack
+      run: echo "$PWD/spack/bin" >> "$GITHUB_PATH"
 
     - name: Concretize
       run: spack -e . concretize

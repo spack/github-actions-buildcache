@@ -7,6 +7,7 @@ spack:
       - bison
       - cmake
       - flex
+      - hdf5 +cxx +fortran +hl
       - git
       - libtool
       - m4

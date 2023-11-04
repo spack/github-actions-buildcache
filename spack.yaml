@@ -1,21 +1,24 @@
 spack:
   view: false
   specs:
-  - autoconf
-  - automake
-  - bison
-  - cmake
-  - flex
-  - git
-  - libtool
-  - m4
-  - meson
-  - mpich
-  - ninja
-  - openblas threads=openmp
-  - openmpi
-  - perl
-  - python@3.11
+  - matrix:
+    - - autoconf
+      - automake
+      - bison
+      - cmake
+      - flex
+      - git
+      - libtool
+      - m4
+      - meson
+      - mpich
+      - ninja
+      - openblas threads=openmp +ilp64
+      - openmpi
+      - perl
+      - python@3.11
+    - - '%gcc@12'
+      - '%gcc@13'
   concretizer:
     unify: false
   config:
@@ -26,4 +29,4 @@ spack:
     spack-buildcache: oci://ghcr.io/spack/github-actions-buildcache
   packages:
     all:
-      require: '%gcc@12 target=x86_64_v2'
+      require: 'target=x86_64_v2'

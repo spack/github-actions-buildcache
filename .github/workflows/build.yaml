@@ -25,7 +25,7 @@ jobs:
       run: echo "$PWD/spack/bin" >> "$GITHUB_PATH"
 
     - name: Concretize
-      run: spack -e . concretize
+      run: spack -e . -v concretize
 
     - name: Install
       run: |

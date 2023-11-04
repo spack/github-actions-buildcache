@@ -95,9 +95,9 @@ If you want to cache your own binaries too, there are three steps to take:
          run: |
            spack -e . mirror set --push --oci-username ${{ github.actor }} --oci-password "${{ secrets.GITHUB_TOKEN }}" local-buildcache
            spack -e . buildcache push --base-image ubuntu:22.04 --unsigned --update-index local-buildcache
-         if: always()
+         if: ${{ !cancelled() }}
    ```
-   NOTE: Make sure to add `if: always()`, so that binaries for successfully
+   NOTE: Make sure to add `if: ${{ !cancelled() }}`, so that binaries for successfully
    installed packages are available also when a dependent fails to build.
 
 ### Caching your own binaries in *private* repos and buildcaches

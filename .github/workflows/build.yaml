@@ -24,6 +24,9 @@ jobs:
     - name: Setup Spack
       run: echo "$PWD/spack/bin" >> "$GITHUB_PATH"
 
+    - name: Find compilers
+      run: spack -e . compiler find --mixed-toolchain
+
     - name: Concretize
       run: spack -e . -v concretize
 

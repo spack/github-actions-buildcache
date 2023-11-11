@@ -23,7 +23,6 @@ spack:
       - python@3.11
     - - '%gcc@11'
       - '%gcc@12'
-      - '%clang@15'
   concretizer:
     unify: false
   config:

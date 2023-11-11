@@ -137,6 +137,19 @@ From a security perspective, notice that the `GITHUB_TOKEN` is exposed to every
 subsequent job step. (This is no different from `docker login`, which also likes
 to store credentials in the home directory.)
 
+## Contributing
+
+If you want to make more packages available, contribute to
+[spack.yaml](spack.yaml).
+
+## Build strategy
+
+Since compiling software in GitHub actions is relatively slow, this stack is
+built using `concretizer:reuse:dependencies`. That means that the latest
+versions of the packages listed in [spack.yaml](spack.yaml) are built, but
+their dependencies are only updated when a package compatibility rule requires
+it. The stack is currently built on demand, not on a schdule.
+
 ## License
 
 This project is part of Spack. Spack is distributed under the terms of both the

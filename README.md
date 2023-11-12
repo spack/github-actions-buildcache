@@ -6,6 +6,7 @@ Currently it provides binaries from Spack `develop` for
 
 - `%gcc@12 os=ubuntu22.04 target=x86_64_v2`
 - `%gcc@11 os=ubuntu22.04 target=x86_64_v2`
+- `%clang@15 os=ubuntu22.04 target=x86_64_v2`
 
 (gcc@13 binaries are currently not available due to missing gfortran compilers)
 

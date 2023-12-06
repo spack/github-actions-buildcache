@@ -25,9 +25,6 @@ spack:
   packages:
     all:
       require: '%gcc@12 target=x86_64_v2'
-
-  mirrors:
-    spack-buildcache: oci://ghcr.io/spack/github-actions-buildcache
 ```
 
 and Spack install it in a GitHub Action:
@@ -37,24 +34,15 @@ name: Build
 
 on: push
 
-env:
-  SPACK_COLOR: always
-
 jobs:
   example:
     runs-on: ubuntu-22.04
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
-
-    - name: Checkout Spack
-      uses: actions/checkout@v3
-      with:
-        repository: spack/spack
-        path: spack
+      uses: actions/checkout@v4
 
     - name: Setup Spack
-      run: echo "$PWD/spack/bin" >> "$GITHUB_PATH"
+      uses: spack/setup-spack@v2
 
     - name: Concretize
       run: spack -e . concretize
@@ -79,7 +67,6 @@ If you want to cache your own binaries too, there are three steps to take:
          root: /opt/spack
          padded_length: 128
      mirrors:
-       spack-buildcache: oci://ghcr.io/spack/github-actions-buildcache
        local-buildcache: oci://ghcr.io/<username>/spack-buildcache
    ```
 

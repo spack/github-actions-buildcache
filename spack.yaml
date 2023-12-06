@@ -38,8 +38,6 @@ spack:
     install_tree:
       root: /opt/spack
       padded_length: 128
-  mirrors:
-    spack-buildcache: oci://ghcr.io/spack/github-actions-buildcache
   packages:
     all:
       require: target=x86_64_v2

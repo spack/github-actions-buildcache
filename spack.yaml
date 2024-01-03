@@ -42,4 +42,4 @@ spack:
       padded_length: 128
   packages:
     all:
-      require: target=x86_64_v2
+      require: target=x86_64_v3

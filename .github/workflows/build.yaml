@@ -12,7 +12,7 @@ jobs:
       packages: write
     steps:
     - name: Checkout
-      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
 
     - name: Setup Spack
       uses: spack/setup-spack@5ab3c91bdefffffad9a7e45d1d156146afebb3a7

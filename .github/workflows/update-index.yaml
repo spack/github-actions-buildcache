@@ -1,0 +1,26 @@
+name: Spack buildcache update index
+
+on: workflow_dispatch
+
+env:
+  SPACK_BACKTRACE: please
+
+jobs:
+  update-index:
+    runs-on: ubuntu-22.04
+    permissions:
+      packages: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+    - name: Setup Spack
+      uses: spack/setup-spack@5ab3c91bdefffffad9a7e45d1d156146afebb3a7
+
+    - name: Add Spack bug fix
+      run: curl -LfsS https://github.com/spack/spack/pull/43136.patch | git -C spack apply -
+
+    - name: Push packages and update index
+      run: |
+        spack mirror set --push --oci-username ${{ github.actor }} --oci-password "${{ secrets.GITHUB_TOKEN }}" github-actions-buildcache
+        spack buildcache update-index github-actions-buildcache

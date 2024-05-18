@@ -17,9 +17,6 @@ jobs:
     - name: Setup Spack
       uses: spack/setup-spack@5ab3c91bdefffffad9a7e45d1d156146afebb3a7
 
-    - name: Add Spack bug fix
-      run: curl -LfsS https://github.com/spack/spack/pull/43136.patch | git -C spack apply -
-
     - name: Find compilers
       run: spack -e . compiler find --mixed-toolchain
 

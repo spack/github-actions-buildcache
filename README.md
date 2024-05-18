@@ -7,7 +7,7 @@ Currently it provides binaries from Spack `develop` for
 - `%gcc@9 ^glibc@2.31 target=x86_64_v3`
 - `%clang@12 ^glibc@2.31 target=x86_64_v3`
 
-which supports the following distros:
+which are compatible with
 
 - Ubuntu 20.04 and later
 - Debian 11 and later

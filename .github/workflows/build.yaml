@@ -7,7 +7,7 @@ env:
 
 jobs:
   rebuild:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     permissions:
       packages: write
     steps:
@@ -31,5 +31,5 @@ jobs:
     - name: Push packages and update index
       run: |
         spack mirror set --push --oci-username ${{ github.actor }} --oci-password "${{ secrets.GITHUB_TOKEN }}" github-actions-buildcache
-        spack -e . buildcache push -j $(($(nproc) + 1)) --base-image ubuntu:22.04 --update-index github-actions-buildcache
+        spack -e . buildcache push -j $(($(nproc) + 1)) --base-image ubuntu:20.04 --update-index github-actions-buildcache
       if: ${{ !cancelled() }}

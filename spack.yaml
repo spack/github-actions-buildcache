@@ -6,6 +6,8 @@ spack:
       - automake
       - bison
       - cmake
+      - fftw +mpi +openmp ^mpich
+      - fftw +mpi +openmp ^openmpi
       - flex
       - git
       - hdf5 +cxx +fortran +hl +mpi ^mpich
@@ -15,21 +17,11 @@ spack:
       - meson
       - mpich
       - ninja
+      - openblas threads=openmp +ilp64
       - openmpi
       - perl
       - python@3.11
     - - '%gcc@9'
-      - '%clang@12'
-  - matrix:
-    - - fftw +mpi +openmp ^mpich
-      - fftw +mpi +openmp ^openmpi
-      - openblas threads=openmp +ilp64
-    - - '%gcc@9'
-  # clang does not have openmp libs in GitHub Actions?
-  - matrix:
-    - - fftw +mpi ^mpich
-      - fftw +mpi ^openmpi
-    - - '%clang@12'
   concretizer:
     unify: false
   config:

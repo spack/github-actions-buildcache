@@ -20,9 +20,6 @@ jobs:
     - name: Find compilers
       run: spack -e . compiler find --mixed-toolchain
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-
     - name: Concretize
       run: spack -e . -v concretize
 

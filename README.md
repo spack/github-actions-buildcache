@@ -52,7 +52,7 @@ jobs:
       run: spack -e . concretize
 
     - name: Install
-      run: spack -e . install --no-check-signature
+      run: spack -e . install
 
     - name: Run
         run: ./my_view/bin/python3 -c 'print("hello world")'
@@ -125,7 +125,7 @@ jobs:
       run: spack -e . concretize
 
     - name: Install
-      run: spack -e . install --no-check-signature
+      run: spack -e . install
 
     - name: Push packages and update index
       run: spack -e . buildcache push --base-image ubuntu:22.04 --update-index local-buildcache

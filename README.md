@@ -55,7 +55,7 @@ jobs:
       run: spack -e . install --no-check-signature
 
     - name: Run
-        run: ./my_view/bin/python -c 'print("hello world")'
+        run: ./my_view/bin/python3 -c 'print("hello world")'
 ```
 
 ## Caching your own binaries
@@ -71,7 +71,13 @@ If you want to cache your own binaries too, there are three steps to take:
          root: /opt/spack
          padded_length: 128
      mirrors:
-       local-buildcache: oci://ghcr.io/<username>/spack-buildcache
+       local-buildcache:
+         url: oci://ghcr.io/<username>/spack-buildcache
+         signed: false
+         access_pair:
+           id_variable: GITHUB_USER
+           secret_variable: GITHUB_TOKEN
+
    ```
 
 2. Configure the permissions for `GITHUB_TOKEN`:
@@ -92,9 +98,10 @@ If you want to cache your own binaries too, there are three steps to take:
      example:
        steps:
        - name: Push packages and update index
-         run: |
-           spack -e . mirror set --push --oci-username ${{ github.actor }} --oci-password "${{ secrets.GITHUB_TOKEN }}" local-buildcache
-           spack -e . buildcache push --base-image ubuntu:22.04 --unsigned --update-index local-buildcache
+         env:
+           GITHUB_USER: ${{ github.actor }}
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         run: spack -e . buildcache push --base-image ubuntu:22.04 --update-index local-buildcache
          if: ${{ !cancelled() }}
    ```
    NOTE: Make sure to add `if: ${{ !cancelled() }}`, so that binaries for successfully
@@ -104,17 +111,16 @@ If you want to cache your own binaries too, there are three steps to take:
 
 When your local buildcache is stored in a private GitHub package,
 you need to specify the OCI credentials already *before* `spack concretize`.
-This is because Spack needs to fetch the buildcache index. Also, remember to
-remove the `--push` flag from `spack mirror set`, since fetching needs
-credentials too:
+This is because Spack needs to fetch the buildcache index.
 
 ```yaml
+env:
+  GITHUB_USER: ${{ github.actor }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   example-private:
     steps:
-    - name: Login
-      run: spack -e . mirror set --oci-username ${{ github.actor }} --oci-password "${{ secrets.GITHUB_TOKEN }}" local-buildcache
-
     - name: Concretize
       run: spack -e . concretize
 
@@ -122,12 +128,11 @@ jobs:
       run: spack -e . install --no-check-signature
 
     - name: Push packages and update index
-      run: spack -e . buildcache push --base-image ubuntu:22.04 --unsigned --update-index local-buildcache
+      run: spack -e . buildcache push --base-image ubuntu:22.04 --update-index local-buildcache
 ```
 
-From a security perspective, notice that the `GITHUB_TOKEN` is exposed to every
-subsequent job step. (This is no different from `docker login`, which also likes
-to store credentials in the home directory.)
+From a security perspective, do note that the `GITHUB_TOKEN` is exposed to every
+job step.
 
 ## Contributing
 

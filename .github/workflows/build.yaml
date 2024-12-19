@@ -26,7 +26,7 @@ jobs:
     - name: Install
       run: |
         spack -e . env depfile -o Makefile
-        make -Orecurse -j $(($(nproc) + 1)) SPACK_INSTALL_FLAGS=--no-check-signature
+        make -Orecurse -j $(($(nproc) + 1))
 
     - name: Push packages and update index
       env:

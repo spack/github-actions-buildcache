@@ -1,6 +1,15 @@
 name: Spack buildcache build
 
-on: push
+on:
+  push:
+    branches:
+    - main
+  workflow_dispatch:
+    inputs:
+      name:
+        type: boolean
+        description: Create a fresh buildcache
+        default: false
 
 env:
   SPACK_BACKTRACE: please
@@ -20,8 +29,13 @@ jobs:
     - name: Find compilers
       run: spack -e . compiler find --mixed-toolchain
 
+    - name: Concretize (fresh)
+      run: spack -e . -v concretize
+      if: ${{ github.event.inputs.name == 'true' }}
+
     - name: Concretize
       run: spack -e . -v concretize
+      if: ${{ github.event.inputs.name == 'false' }}
 
     - name: Install
       run: |

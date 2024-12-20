@@ -30,7 +30,7 @@ jobs:
       run: spack -e . compiler find --mixed-toolchain
 
     - name: Concretize (fresh)
-      run: spack -e . -v concretize
+      run: spack -e . -v concretize --fresh
       if: ${{ github.event.inputs.name == 'true' }}
 
     - name: Concretize (reuse)

@@ -33,9 +33,9 @@ jobs:
       run: spack -e . -v concretize
       if: ${{ github.event.inputs.name == 'true' }}
 
-    - name: Concretize
+    - name: Concretize (reuse)
       run: spack -e . -v concretize
-      if: ${{ github.event.inputs.name == 'false' }}
+      if: ${{ github.event.inputs.name == 'false' || github.event_name != 'workflow_dispatch' }}
 
     - name: Install
       run: |

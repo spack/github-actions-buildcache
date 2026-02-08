@@ -29,6 +29,9 @@ jobs:
     - name: Find compilers
       run: spack -e . compiler find
 
+    - name: Show packages config
+      run: spack -e . config get packages
+
     - name: Concretize (fresh)
       run: spack -e . -v concretize --fresh
       if: ${{ github.event.inputs.name == 'true' }}

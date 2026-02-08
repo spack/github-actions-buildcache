@@ -1,27 +1,25 @@
 spack:
   view: false
   specs:
-  - matrix:
-    - - autoconf
-      - automake
-      - bison
-      - cmake
-      - fftw +mpi +openmp ^mpich
-      - fftw +mpi +openmp ^openmpi
-      - flex
-      - git
-      - hdf5 +cxx +fortran +hl +mpi ^mpich
-      - hdf5 +cxx +fortran +hl +mpi ^openmpi
-      - libtool
-      - m4
-      - meson
-      - mpich
-      - ninja
-      - openblas threads=openmp +ilp64
-      - openmpi
-      - perl
-      - python@3.11
-    - - '%gcc@11'
+  - autoconf
+  - automake
+  - bison
+  - cmake
+  - fftw +mpi +openmp ^mpich
+  - fftw +mpi +openmp ^openmpi
+  - flex
+  - git
+  - hdf5 +cxx +fortran +hl +mpi ^mpich
+  - hdf5 +cxx +fortran +hl +mpi ^openmpi
+  - libtool
+  - m4
+  - meson
+  - mpich
+  - ninja
+  - openblas threads=openmp +ilp64
+  - openmpi
+  - perl
+  - python@3.11
   concretizer:
     unify: false
   config:
@@ -31,6 +29,12 @@ spack:
   packages:
     all:
       require: target=x86_64_v3
+    c:
+      prefer: [gcc@9]
+    cxx:
+      prefer: [gcc@9]
+    fortran:
+      prefer: [gcc@9]
   mirrors:
     github-actions-buildcache:
       url: oci://ghcr.io/spack/github-actions-buildcache

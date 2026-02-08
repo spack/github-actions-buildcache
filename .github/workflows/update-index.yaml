@@ -12,12 +12,13 @@ jobs:
       packages: write
     steps:
     - name: Checkout
-      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
     - name: Setup Spack
-      uses: spack/setup-spack@5ab3c91bdefffffad9a7e45d1d156146afebb3a7
+      uses: spack/setup-spack@v3
 
-    - name: Push packages and update index
-      run: |
-        spack mirror set --push --oci-username ${{ github.actor }} --oci-password "${{ secrets.GITHUB_TOKEN }}" github-actions-buildcache
-        spack buildcache update-index github-actions-buildcache
+    - name: Update index
+      env:
+        GITHUB_USER: ${{ github.actor }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: spack buildcache update-index github-actions-buildcache

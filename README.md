@@ -4,15 +4,14 @@ This repo provides a buildcache to speed up Spack in your GitHub Actions.
 
 Currently it provides binaries from Spack `develop` for
 
-- `%gcc@9 ^glibc@2.31 target=x86_64_v3`
-- `%clang@12 ^glibc@2.31 target=x86_64_v3`
+- `%gcc@11 ^glibc@2.35 target=x86_64_v3`
 
 which are compatible with
 
-- Ubuntu 20.04 and later
-- Debian 11 and later
+- Ubuntu 22.04 and later
+- Debian 12 and later
 - RHEL 9 and later
-- Fedora 32 and later
+- Fedora 36 and later
 
 To use it, add an environment `spack.yaml` to the root of your own repository
 
@@ -46,7 +45,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup Spack
-      uses: spack/setup-spack@v2
+      uses: spack/setup-spack@v3
 
     - name: Concretize
       run: spack -e . concretize

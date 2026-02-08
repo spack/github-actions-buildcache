@@ -21,7 +21,7 @@ spack:
       - openmpi
       - perl
       - python@3.11
-    - - '%gcc@9'
+    - - '%gcc@11'
   concretizer:
     unify: false
   config:

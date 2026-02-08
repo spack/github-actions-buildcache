@@ -16,7 +16,7 @@ env:
 
 jobs:
   rebuild:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     permissions:
       packages: write
     steps:
@@ -46,5 +46,5 @@ jobs:
       env:
         GITHUB_USER: ${{ github.actor }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: spack -e . buildcache push -j $(($(nproc) + 1)) --base-image ubuntu:20.04 --update-index github-actions-buildcache
+      run: spack -e . buildcache push -j $(($(nproc) + 1)) --base-image ubuntu:22.04 --update-index github-actions-buildcache
       if: ${{ !cancelled() }}

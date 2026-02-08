@@ -30,11 +30,11 @@ spack:
     all:
       require: target=x86_64_v3
     c:
-      prefer: [gcc@9]
+      prefer: [gcc@10]
     cxx:
-      prefer: [gcc@9]
+      prefer: [gcc@10]
     fortran:
-      prefer: [gcc@9]
+      prefer: [gcc@10]
   mirrors:
     github-actions-buildcache:
       url: oci://ghcr.io/spack/github-actions-buildcache

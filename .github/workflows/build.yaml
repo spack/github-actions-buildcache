@@ -27,7 +27,7 @@ jobs:
       uses: spack/setup-spack@v3
 
     - name: Find compilers
-      run: spack -e . compiler find --mixed-toolchain
+      run: spack -e . compiler find
 
     - name: Concretize (fresh)
       run: spack -e . -v concretize --fresh
